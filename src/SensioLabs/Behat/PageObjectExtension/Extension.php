@@ -16,6 +16,7 @@ use Behat\MinkExtension\Extension as MinkExtension;
 class Extension implements ExtensionInterface
 {
     const PAGE_OBJECT_FACTORY = 'sensio_labs.page_object_extension.page_factory';
+
     /**
      * {@inheritDoc}
      */
@@ -64,6 +65,10 @@ class Extension implements ExtensionInterface
     {
     }
 
+    /**
+     * @param ContainerBuilder $container
+     * @param array            $config
+     */
     private function loadPageObjectFactory(ContainerBuilder $container, array $config)
     {
         $definition = new Definition('SensioLabs\Behat\PageObjectExtension\Context\PageFactory', array(
@@ -77,6 +82,9 @@ class Extension implements ExtensionInterface
         $container->setDefinition(self::PAGE_OBJECT_FACTORY, $definition);
     }
 
+    /**
+     * @param ContainerBuilder $container
+     */
     private function loadContextInitializer(ContainerBuilder $container)
     {
         $definition = new Definition('SensioLabs\Behat\PageObjectExtension\Context\Initializer\PageObjectAwareInitializer', array(

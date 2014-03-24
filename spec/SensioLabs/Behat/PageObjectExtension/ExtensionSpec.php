@@ -9,7 +9,7 @@ use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 class ExtensionSpec extends ObjectBehavior
 {
-    function it_should_be_a_behat_extension()
+    function it_is_a_testwork_extension()
     {
         $this->shouldHaveType('Behat\Testwork\ServiceContainer\Extension');
     }

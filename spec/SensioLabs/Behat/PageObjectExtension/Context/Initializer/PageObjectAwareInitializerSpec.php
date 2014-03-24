@@ -17,27 +17,19 @@ class PageObjectAwareInitializerSpec extends ObjectBehavior
         $this->shouldHaveType('Behat\Behat\Context\Initializer\ContextInitializer');
     }
 
-    function it_supports_page_object_aware($context)
-    {
-        $context->implement('SensioLabs\Behat\PageObjectExtension\Context\PageObjectAwareInterface');
-        $context->implement('Behat\Behat\Context\Context');
-
-        $this->supports($context)->shouldReturn(true);
-    }
-
-    function it_should_not_support_other_contexts($context)
-    {
-        $context->implement('Behat\Behat\Context\Context');
-
-        $this->supports($context)->shouldReturn(false);
-    }
-
-    function it_should_inject_the_page_factory_into_the_context($context, $pageFactory)
+    function it_should_inject_the_page_factory_into_the_context($context, PageFactory $pageFactory)
     {
         $context->implement('SensioLabs\Behat\PageObjectExtension\Context\PageObjectAwareInterface');
         $context->implement('Behat\Behat\Context\Context');
 
         $context->setPageFactory($pageFactory)->shouldBeCalled();
+
+        $this->initializeContext($context)->shouldReturn(null);
+    }
+
+    function it_should_not_inject_the_page_factory_into_other_contexts($context)
+    {
+        $context->implement('Behat\Behat\Context\Context');
 
         $this->initializeContext($context)->shouldReturn(null);
     }
